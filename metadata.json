@@ -1,0 +1,8 @@
+{
+  "name": "TUNIBOTS",
+  "description": "Boutique de produits digitaux premium (gaming, comptes, outils IA, boosting, abonnements, recharges).",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
