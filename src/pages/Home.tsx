@@ -18,6 +18,116 @@ const DynamicIcon = ({ name, className }: { name: string; className?: string }) 
   return <IconComponent className={className} />;
 };
 
+const platformsList = [
+  {
+    name: 'Rockstar Games',
+    slug: 'rockstar',
+    link: '/produits?search=Rockstar',
+    bgImage: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500&auto=format&fit=crop&q=80',
+    logo: (
+      <div className="flex items-center gap-2">
+        <div className="bg-[#fcbe13] text-black font-extrabold px-2.5 py-1 rounded shadow-lg font-sans text-base select-none relative shrink-0">
+          R<span className="text-[7px] text-white absolute bottom-0.5 right-0.5 font-black">★</span>
+        </div>
+        <span className="font-display font-black tracking-tight text-white text-xs sm:text-sm drop-shadow-md">Rockstar Games</span>
+      </div>
+    )
+  },
+  {
+    name: 'EA Play',
+    slug: 'ea-play',
+    link: '/produits?search=EA',
+    bgImage: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500&auto=format&fit=crop&q=80',
+    logo: (
+      <div className="flex items-center gap-2">
+        <div className="bg-[#f51e38] text-white font-display font-extrabold tracking-wider px-2 py-1 rounded shadow-lg text-[10px] italic uppercase shrink-0">
+          EA PLAY
+        </div>
+        <span className="font-display font-black tracking-tight text-white text-xs sm:text-sm drop-shadow-md">EA Play</span>
+      </div>
+    )
+  },
+  {
+    name: 'Steam',
+    slug: 'steam',
+    link: '/produits?category=gaming',
+    bgImage: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500&auto=format&fit=crop&q=80',
+    logo: (
+      <div className="flex items-center gap-2">
+        <div className="bg-blue-600/90 backdrop-blur-md p-1.5 rounded-full text-white shadow-lg shrink-0">
+          <Icons.Layers className="h-3.5 w-3.5" />
+        </div>
+        <span className="font-display font-black tracking-wider text-white text-xs sm:text-sm drop-shadow-md uppercase">STEAM</span>
+      </div>
+    )
+  },
+  {
+    name: 'Xbox',
+    slug: 'xbox',
+    link: '/produits?category=abonnements',
+    bgImage: 'https://images.unsplash.com/photo-1605901309584-818e25960a8f?w=500&auto=format&fit=crop&q=80',
+    logo: (
+      <div className="flex items-center gap-2">
+        <div className="bg-[#107c10]/95 backdrop-blur-md p-1.5 rounded-full text-white shadow-lg flex items-center justify-center shrink-0">
+          <Icons.Gamepad2 className="h-3.5 w-3.5" />
+        </div>
+        <span className="font-display font-black tracking-tight text-white text-xs sm:text-sm drop-shadow-md uppercase">XBOX</span>
+      </div>
+    )
+  },
+  {
+    name: 'PSN',
+    slug: 'psn',
+    link: '/produits?category=recharges',
+    bgImage: 'https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=500&auto=format&fit=crop&q=80',
+    logo: (
+      <div className="flex items-center gap-2">
+        <div className="bg-[#003087]/95 backdrop-blur-md p-1.5 rounded-full text-white shadow-lg flex items-center justify-center shrink-0">
+          <Icons.Cpu className="h-3.5 w-3.5" />
+        </div>
+        <span className="font-display font-black tracking-tight text-white text-xs sm:text-sm drop-shadow-md">PlayStation</span>
+      </div>
+    )
+  },
+  {
+    name: 'Nintendo',
+    slug: 'nintendo',
+    link: '/produits?search=Nintendo',
+    bgImage: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500&auto=format&fit=crop&q=80',
+    logo: (
+      <div className="flex items-center justify-center bg-[#e60012]/95 backdrop-blur-md px-3 py-1 rounded-full shadow-lg border border-white/20 shrink-0">
+        <span className="font-display font-black tracking-widest text-white text-[10px] uppercase">Nintendo</span>
+      </div>
+    )
+  },
+  {
+    name: 'Epic Games',
+    slug: 'epic-games',
+    link: '/produits?category=gaming',
+    bgImage: 'https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=500&auto=format&fit=crop&q=80',
+    logo: (
+      <div className="flex items-center gap-2">
+        <div className="bg-neutral-900/95 border border-white/10 p-1.5 rounded text-white shadow-lg shrink-0">
+          <Icons.Terminal className="h-3.5 w-3.5" />
+        </div>
+        <span className="font-display font-black tracking-tight text-white text-xs sm:text-sm drop-shadow-md uppercase">EPIC GAMES</span>
+      </div>
+    )
+  },
+  {
+    name: 'GOG.COM',
+    slug: 'gog-com',
+    link: '/produits?category=gaming',
+    bgImage: 'https://images.unsplash.com/photo-1563089145-599997674d42?w=500&auto=format&fit=crop&q=80',
+    logo: (
+      <div className="flex items-center gap-1.5">
+        <span className="font-display font-black tracking-tighter text-white text-sm sm:text-base drop-shadow-md">GOG</span>
+        <span className="font-mono text-[8px] text-purple-300 font-extrabold tracking-widest bg-purple-500/35 border border-purple-500/40 px-1 py-0.5 rounded">COM</span>
+      </div>
+    )
+  }
+];
+
 export const Home: React.FC = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
@@ -398,6 +508,77 @@ export const Home: React.FC = () => {
           >
             Voir toute la boutique
           </Button>
+        </div>
+      </section>
+
+      {/* Platform Banner Marquee */}
+      <section className="relative py-12 overflow-hidden select-none">
+        {/* Glow Ambient Blur in Background */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
+          <div className="absolute w-[300px] sm:w-[600px] h-[150px] rounded-full filter blur-[80px] opacity-[0.18] dark:opacity-[0.25] transition-colors duration-500 bg-gradient-to-r from-orange-500 via-pink-500 to-blue-500" />
+        </div>
+
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-6 relative z-10">
+          <div className="text-center md:text-left space-y-1">
+            <h2 className={`font-display text-2xl font-black tracking-tight uppercase ${
+              theme === 'dark' ? 'text-white' : 'text-neutral-900'
+            }`}>
+              EXPLORE PAR <span className="text-orange-500">PLATEFORME</span>
+            </h2>
+            <p className={`text-xs ${
+              theme === 'dark' ? 'text-neutral-400' : 'text-neutral-500'
+            }`}>
+              Retrouvez vos plateformes et services favoris au meilleur prix en Tunisie.
+            </p>
+          </div>
+        </div>
+
+        {/* Marquee Track Container */}
+        <div className="relative w-full overflow-hidden flex items-center py-2 z-10">
+          {/* Edge Fades for Modern Slick Look */}
+          <div className={`absolute left-0 top-0 bottom-0 w-16 sm:w-40 z-20 pointer-events-none bg-gradient-to-r ${
+            theme === 'dark' ? 'from-[#050505] to-transparent' : 'from-[#fcfcfc] to-transparent'
+          }`} />
+          <div className={`absolute right-0 top-0 bottom-0 w-16 sm:w-40 z-20 pointer-events-none bg-gradient-to-l ${
+            theme === 'dark' ? 'from-[#050505] to-transparent' : 'from-[#fcfcfc] to-transparent'
+          }`} />
+
+          {/* Scrolling Marquee */}
+          <div className="animate-marquee gap-5 flex items-center whitespace-nowrap">
+            {[...platformsList, ...platformsList, ...platformsList].map((platform, idx) => (
+              <div
+                key={`${platform.slug}-${idx}`}
+                className="relative shrink-0 w-[210px] h-[75px] rounded-2xl group overflow-visible"
+              >
+                {/* Dynamic back blur acting as a premium colored ambient glow/shadow */}
+                <div
+                  className="absolute inset-1 rounded-2xl bg-cover bg-center opacity-40 blur-md group-hover:opacity-75 transition-opacity duration-300 scale-102 pointer-events-none"
+                  style={{ backgroundImage: `url(${platform.bgImage})` }}
+                />
+
+                {/* Main Link containing the actual image card with backdrop blur border */}
+                <Link
+                  to={platform.link}
+                  className="relative z-10 flex items-center justify-center w-full h-full rounded-2xl overflow-hidden border border-black/10 dark:border-white/10 bg-black/40 dark:bg-black/50 transition-all duration-300 hover:scale-[1.04] hover:shadow-lg"
+                >
+                  {/* Real Background Image */}
+                  <img
+                    src={platform.bgImage}
+                    alt={platform.name}
+                    className="absolute inset-0 w-full h-full object-cover rounded-2xl opacity-50 group-hover:opacity-65 transition-opacity duration-300"
+                    referrerPolicy="no-referrer"
+                  />
+                  {/* Dark Overlay gradient to pop the logo */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent rounded-2xl" />
+
+                  {/* Logo / Content */}
+                  <div className="relative z-20 flex items-center justify-center p-3 w-full h-full">
+                    {platform.logo}
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

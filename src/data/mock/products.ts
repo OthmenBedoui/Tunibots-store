@@ -20,8 +20,8 @@ export const mockProducts: Product[] = [
       'Espace de stockage de fichiers illimité',
       'Garantie totale de 12 mois avec support réactif'
     ],
-    coverImage: '/input_file_0.png',
-    bannerImage: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&auto=format&fit=crop&q=80',
+    coverImage: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=600&auto=format&fit=crop&q=80',
+    bannerImage: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&auto=format&fit=crop&q=80',
     screenshots: [],
     attributes: {
       validity: '12 Mois (1 An)',
@@ -53,8 +53,8 @@ export const mockProducts: Product[] = [
       'Version globale 100% officielle',
       'Multijoueur coopératif et compétitif'
     ],
-    coverImage: 'https://images.unsplash.com/photo-1612287230202-1bf1d85d1bdf?w=600&auto=format&fit=crop&q=80',
-    bannerImage: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=1200&auto=format&fit=crop&q=80',
+    coverImage: 'https://images.unsplash.com/photo-1514539079130-25950c84af65?w=600&auto=format&fit=crop&q=80',
+    bannerImage: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1200&auto=format&fit=crop&q=80',
     screenshots: [
       'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&auto=format&fit=crop&q=80',
       'https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=800&auto=format&fit=crop&q=80'
@@ -88,7 +88,7 @@ export const mockProducts: Product[] = [
       'Création d\'images ultra-rapide',
       'Garantie de remplacement en cas de problème'
     ],
-    coverImage: 'https://images.unsplash.com/photo-1677442136019-21780efad99a?w=600&auto=format&fit=crop&q=80',
+    coverImage: 'https://images.unsplash.com/photo-1680814907478-90f74597d9e4?w=600&auto=format&fit=crop&q=80',
     bannerImage: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&auto=format&fit=crop&q=80',
     screenshots: [],
     attributes: {
@@ -120,7 +120,7 @@ export const mockProducts: Product[] = [
       'Écran exclusif avec votre propre code PIN',
       'Aucune interruption ou partage de profil'
     ],
-    coverImage: 'https://images.unsplash.com/photo-1574375927938-d5a98e8edd86?w=600&auto=format&fit=crop&q=80',
+    coverImage: 'https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=600&auto=format&fit=crop&q=80',
     bannerImage: 'https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=1200&auto=format&fit=crop&q=80',
     screenshots: [],
     attributes: {
@@ -152,7 +152,7 @@ export const mockProducts: Product[] = [
       'Accès illimité aux 100M+ d\'assets Premium',
       'Outil d\'effacement d\'arrière-plan magique en 1 clic'
     ],
-    coverImage: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=600&auto=format&fit=crop&q=80',
+    coverImage: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600&auto=format&fit=crop&q=80',
     bannerImage: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&auto=format&fit=crop&q=80',
     screenshots: [],
     attributes: {
@@ -184,8 +184,8 @@ export const mockProducts: Product[] = [
       'Livraison instantanée par email',
       '40,000+ Essences Bleues incluses'
     ],
-    coverImage: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&auto=format&fit=crop&q=80',
-    bannerImage: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&auto=format&fit=crop&q=80',
+    coverImage: 'https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=600&auto=format&fit=crop&q=80',
+    bannerImage: 'https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=1200&auto=format&fit=crop&q=80',
     screenshots: [],
     attributes: {
       region: 'EUW (Europe West)',
@@ -216,8 +216,8 @@ export const mockProducts: Product[] = [
       'Valable sur TOUTES les plateformes connectées',
       '100% sûr, aucun risque de ban'
     ],
-    coverImage: 'https://images.unsplash.com/photo-1589241062272-c0a000072dfa?w=600&auto=format&fit=crop&q=80',
-    bannerImage: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&auto=format&fit=crop&q=80',
+    coverImage: 'https://images.unsplash.com/photo-1535320903710-d993d3d77d29?w=600&auto=format&fit=crop&q=80',
+    bannerImage: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&auto=format&fit=crop&q=80',
     screenshots: [],
     attributes: {
       method: 'Recharge par ID Epic Games',
@@ -248,7 +248,7 @@ export const mockProducts: Product[] = [
       'Écoute hors ligne (Téléchargement)',
       'Qualité audio premium de 320 kbps'
     ],
-    coverImage: 'https://images.unsplash.com/photo-1614680376593-902f74fa0d41?w=600&auto=format&fit=crop&q=80',
+    coverImage: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80',
     bannerImage: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1200&auto=format&fit=crop&q=80',
     screenshots: [],
     attributes: {
@@ -280,8 +280,8 @@ export const mockProducts: Product[] = [
       'Stream privé disponible sur Discord',
       'Protection VPN du pays de votre choix'
     ],
-    coverImage: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&auto=format&fit=crop&q=80',
-    bannerImage: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1200&auto=format&fit=crop&q=80',
+    coverImage: 'https://images.unsplash.com/photo-1627856013091-fed6e4e30025?w=600&auto=format&fit=crop&q=80',
+    bannerImage: 'https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=1200&auto=format&fit=crop&q=80',
     screenshots: [],
     attributes: {
       completionTime: '1 à 2 jours',
