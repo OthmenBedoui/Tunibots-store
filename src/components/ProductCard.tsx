@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { Product } from '../data/types';
 import { useCart } from '../context/CartContext';
 import { useTheme } from '../context/ThemeContext';
-import { Star, ShoppingCart, ArrowRight, ShieldAlert, Cpu, Gamepad2, Users, Flame, Tv, Coins } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
+import { Star, ShoppingCart, ArrowRight, ShieldAlert, Cpu, Gamepad2, Users, Flame, Tv, Coins, Crown, Sparkles } from 'lucide-react';
 import { Button } from '../../components/ui/button';
 import { Badge } from '../../components/ui/badge';
 import { Card, CardContent, CardFooter, CardHeader } from '../../components/ui/card';
@@ -16,6 +17,10 @@ interface ProductCardProps {
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addToCart } = useCart();
   const { theme } = useTheme();
+  const { isVIP } = useAuth();
+
+  const vipPrice = product.price * 0.85;
+  const currentPrice = isVIP ? vipPrice : product.price;
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -25,7 +30,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       title: product.title,
       coverImage: product.coverImage,
       platform: product.platforms[0] || 'Digital',
-      unitPrice: product.price,
+      unitPrice: currentPrice,
     });
   };
 
@@ -101,17 +106,32 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           )}
 
           {/* Type Badge */}
-          <div className="absolute top-2 left-2 flex gap-1.5">
+          <div className="absolute top-2 left-2 flex flex-col gap-1 items-start">
             <Badge className="flex items-center gap-1 border-none bg-neutral-950/80 backdrop-blur text-[10px] font-bold text-neutral-300">
               {getTypeIcon()}
               <span>{getTypeNameFr()}</span>
             </Badge>
+
+            {product.isFeatured && (
+              <Badge className={`border-none text-[9px] font-bold ${
+                isVIP 
+                  ? 'bg-gradient-to-r from-amber-500 to-yellow-400 text-neutral-950 shadow-md shadow-yellow-500/25 animate-pulse'
+                  : 'bg-orange-500 text-white'
+              }`}>
+                {isVIP && <Crown className="h-2 w-2 mr-0.5 inline fill-neutral-950/20" />}
+                🆕 NOUVEAU
+              </Badge>
+            )}
           </div>
 
           {/* Discount Badge */}
           {product.discountPct > 0 && (
-            <div className="absolute top-2 right-2 rounded bg-orange-500 px-1.5 py-0.5 text-[10px] font-black font-mono text-white">
-              -{product.discountPct}%
+            <div className={`absolute top-2 right-2 rounded px-1.5 py-0.5 text-[10px] font-black font-mono text-white ${
+              isVIP 
+                ? 'bg-gradient-to-r from-yellow-500 to-amber-600 shadow-md shadow-amber-500/30'
+                : 'bg-orange-500'
+            }`}>
+              {isVIP ? `🔥 VIP -${product.discountPct + 15}%` : `-${product.discountPct}%`}
             </div>
           )}
 
@@ -166,16 +186,34 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           }`}>
             {/* Price section */}
             <div className="flex flex-col">
-              {product.discountPct > 0 && (
-                <span className="text-[10px] text-neutral-500 line-through font-mono">
-                  {product.originalPrice.toFixed(1)} DT
-                </span>
+              {isVIP ? (
+                <>
+                  <span className="text-[10px] text-neutral-500 line-through font-mono">
+                    {product.price.toFixed(1)} DT
+                  </span>
+                  <span className="font-display text-base font-black font-mono text-amber-500 flex items-center gap-1 drop-shadow-[0_0_8px_rgba(245,158,11,0.2)]">
+                    <Crown className="h-3.5 w-3.5 fill-amber-500/20 text-amber-500 animate-pulse" />
+                    {vipPrice.toFixed(1)} <span className="text-[10px] text-amber-500 font-extrabold uppercase">VIP DT</span>
+                  </span>
+                </>
+              ) : (
+                <>
+                  {product.discountPct > 0 && (
+                    <span className="text-[10px] text-neutral-500 line-through font-mono">
+                      {product.originalPrice.toFixed(1)} DT
+                    </span>
+                  )}
+                  <span className={`font-display text-base font-black font-mono ${
+                    theme === 'dark' ? 'text-white' : 'text-neutral-900'
+                  }`}>
+                    {product.price.toFixed(1)} <span className="text-xs text-orange-500 font-extrabold">DT</span>
+                  </span>
+                  <span className="text-[9px] text-amber-500 font-semibold flex items-center gap-0.5 mt-0.5">
+                    <Sparkles className="h-2.5 w-2.5 text-amber-500 animate-pulse" />
+                    Prix VIP : {vipPrice.toFixed(1)} DT
+                  </span>
+                </>
               )}
-              <span className={`font-display text-base font-black font-mono ${
-                theme === 'dark' ? 'text-white' : 'text-neutral-900'
-              }`}>
-                {product.price.toFixed(1)} <span className="text-xs text-orange-500 font-extrabold">DT</span>
-              </span>
             </div>
 
             {/* Quick action button */}

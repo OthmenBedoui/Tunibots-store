@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useProduct, useProducts } from '../data/queries/storeQueries';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 import { ProductCard } from '../components/ProductCard';
-import { Star, ShoppingCart, ShieldCheck, Heart, Info, ChevronRight, MessageSquareCode, Users, Flame, Gamepad2, Cpu, Tv, Coins, CircleCheck } from 'lucide-react';
+import { Star, ShoppingCart, ShieldCheck, Heart, Info, ChevronRight, MessageSquareCode, Users, Flame, Gamepad2, Cpu, Tv, Coins, CircleCheck, Crown, Sparkles } from 'lucide-react';
 import { Button } from '../../components/ui/button';
 import { Badge } from '../../components/ui/badge';
 import { Card, CardContent } from '../../components/ui/card';
@@ -63,24 +64,30 @@ export const ProductDetail: React.FC = () => {
     ? relatedProducts.filter(p => p.id !== product.id).slice(0, 4)
     : [];
 
+  const { isVIP } = useAuth();
+  const vipPrice = product ? product.price * 0.85 : 0;
+  const currentPrice = isVIP && product ? vipPrice : (product ? product.price : 0);
+
   const handleAddToCart = () => {
+    if (!product) return;
     addToCart({
       productId: product.id,
       title: product.title,
       coverImage: product.coverImage,
       platform: product.platforms[0] || 'Digital',
-      unitPrice: product.price,
+      unitPrice: currentPrice,
       qty: qty,
     });
   };
 
   const handleBuyNow = () => {
+    if (!product) return;
     addToCart({
       productId: product.id,
       title: product.title,
       coverImage: product.coverImage,
       platform: product.platforms[0] || 'Digital',
-      unitPrice: product.price,
+      unitPrice: currentPrice,
       qty: qty,
     });
     // Scroll to top and help user check out via cart drawer or simply highlight
@@ -302,21 +309,49 @@ export const ProductDetail: React.FC = () => {
               </div>
 
               {/* Pricing section */}
-              <div className="flex items-baseline space-x-3 pt-2">
-                <span className="font-display text-3xl font-black text-white font-mono">
-                  {product.price.toFixed(1)} <span className="text-sm text-orange-500">DT</span>
-                </span>
-                {product.discountPct > 0 && (
-                  <>
-                    <span className="text-sm text-neutral-500 line-through font-mono">
-                      {product.originalPrice.toFixed(1)} DT
+              {isVIP ? (
+                <div className="space-y-1.5 pt-2">
+                  <div className="flex items-baseline space-x-3">
+                    <span className="font-display text-3xl font-black text-amber-500 font-mono flex items-center gap-1.5 drop-shadow-[0_0_12px_rgba(245,158,11,0.25)]">
+                      <Crown className="h-6 w-6 text-amber-500 fill-amber-500/10" />
+                      {vipPrice.toFixed(1)} <span className="text-sm text-amber-500 font-extrabold uppercase">VIP DT</span>
                     </span>
-                    <Badge className="bg-orange-500 text-white font-mono text-[10px] py-0.5 px-1.5 border-none">
-                      Économisez {(product.originalPrice - product.price).toFixed(0)} DT
-                    </Badge>
-                  </>
-                )}
-              </div>
+                    <span className="text-sm text-neutral-500 line-through font-mono">
+                      {product.price.toFixed(1)} DT
+                    </span>
+                  </div>
+                  <Badge className="bg-amber-500 text-neutral-950 font-black font-mono text-[10px] py-1 px-2.5 border-none mt-1 shadow-md shadow-amber-500/15 flex items-center gap-1 w-max">
+                    <Sparkles className="h-3.5 w-3.5" />
+                    Économie VIP : {((product.price - vipPrice) * qty).toFixed(1)} DT appliquée !
+                  </Badge>
+                </div>
+              ) : (
+                <div className="flex flex-col space-y-2 pt-2">
+                  <div className="flex items-baseline space-x-3">
+                    <span className="font-display text-3xl font-black text-white font-mono">
+                      {product.price.toFixed(1)} <span className="text-sm text-orange-500">DT</span>
+                    </span>
+                    {product.discountPct > 0 && (
+                      <>
+                        <span className="text-sm text-neutral-500 line-through font-mono">
+                          {product.originalPrice.toFixed(1)} DT
+                        </span>
+                        <Badge className="bg-orange-500 text-white font-mono text-[10px] py-0.5 px-1.5 border-none">
+                          Économisez {(product.originalPrice - product.price).toFixed(0)} DT
+                        </Badge>
+                      </>
+                    )}
+                  </div>
+                  
+                  {/* VIP teaser on detail page */}
+                  <div className="flex items-center gap-2 p-3 rounded-lg bg-amber-500/5 border border-amber-500/10 w-full sm:w-max">
+                    <Crown className="h-4 w-4 text-amber-500 animate-pulse shrink-0" />
+                    <span className="text-xs text-neutral-300 font-medium">
+                      Prix Membre VIP : <span className="text-amber-500 font-bold font-mono">{vipPrice.toFixed(1)} DT</span> (-15%)
+                    </span>
+                  </div>
+                </div>
+              )}
 
               {/* Delivery and Guarantee assurances */}
               <div className="text-[11px] text-neutral-400 space-y-2 bg-neutral-900/60 p-3 rounded border border-white/5">

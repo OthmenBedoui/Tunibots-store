@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSettings, useNavItems } from '../data/queries/storeQueries';
-import { Mail, Phone, Flame, Facebook, Instagram, ShieldCheck, HelpCircle } from 'lucide-react';
+import { Mail, Phone, Flame, Facebook, Instagram, ShieldCheck, HelpCircle, Crown } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const { data: settings } = useSettings();
@@ -55,7 +55,12 @@ export const Footer: React.FC = () => {
                 <Link to="/produits?category=gaming" className="hover:text-orange-500 transition-colors">Gaming & Clés Steam</Link>
               </li>
               <li>
-                <Link to="/produits?category=boosting" className="hover:text-orange-500 transition-colors">Boosting Valorant/LoL</Link>
+                <Link to="/connexion" className="hover:text-amber-500 transition-colors flex items-center gap-1 font-semibold text-amber-500/90">
+                  <Crown className="h-3 w-3 shrink-0" /> Espace VIP / Connexion
+                </Link>
+              </li>
+              <li>
+                <Link to="/inscription" className="hover:text-orange-500 transition-colors">Créer un Compte Club</Link>
               </li>
             </ul>
           </div>

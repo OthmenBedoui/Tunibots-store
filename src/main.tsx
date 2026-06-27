@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, useLocation, Outlet } from 'react-router-
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { CartProvider } from './context/CartContext';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
+import { AuthProvider } from './context/AuthContext';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { Home } from './pages/Home';
@@ -14,6 +15,8 @@ import { BlogPostDetail } from './pages/BlogPostDetail';
 import { About } from './pages/About';
 import { Contact } from './pages/Contact';
 import { CGV, Confidentialite, FAQ } from './pages/StaticPages';
+import { AuthPage } from './pages/AuthPage';
+import { ProfilePage } from './pages/ProfilePage';
 import { Toaster } from '../components/ui/sonner';
 import { Flame } from 'lucide-react';
 import './index.css';
@@ -106,27 +109,32 @@ const App: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <CartProvider>
-          <BrowserRouter>
-            <ScrollToTop />
-            <Routes>
-              <Route path="/" element={<AppLayout />}>
-                <Route index element={<Home />} />
-                <Route path="produits" element={<Products />} />
-                <Route path="produit/:slug" element={<ProductDetail />} />
-                <Route path="blog" element={<Blog />} />
-                <Route path="blog/:slug" element={<BlogPostDetail />} />
-                <Route path="a-propos" element={<About />} />
-                <Route path="contact" element={<Contact />} />
-                <Route path="cgv" element={<CGV />} />
-                <Route path="confidentialite" element={<Confidentialite />} />
-                <Route path="faq" element={<FAQ />} />
-                <Route path="*" element={<Home />} />
-              </Route>
-            </Routes>
-            <Toaster position="bottom-right" closeButton />
-          </BrowserRouter>
-        </CartProvider>
+        <AuthProvider>
+          <CartProvider>
+            <BrowserRouter>
+              <ScrollToTop />
+              <Routes>
+                <Route path="/" element={<AppLayout />}>
+                  <Route index element={<Home />} />
+                  <Route path="produits" element={<Products />} />
+                  <Route path="produit/:slug" element={<ProductDetail />} />
+                  <Route path="blog" element={<Blog />} />
+                  <Route path="blog/:slug" element={<BlogPostDetail />} />
+                  <Route path="a-propos" element={<About />} />
+                  <Route path="contact" element={<Contact />} />
+                  <Route path="cgv" element={<CGV />} />
+                  <Route path="confidentialite" element={<Confidentialite />} />
+                  <Route path="faq" element={<FAQ />} />
+                  <Route path="connexion" element={<AuthPage initialMode="login" />} />
+                  <Route path="inscription" element={<AuthPage initialMode="signup" />} />
+                  <Route path="profil" element={<ProfilePage />} />
+                  <Route path="*" element={<Home />} />
+                </Route>
+              </Routes>
+              <Toaster position="bottom-right" closeButton />
+            </BrowserRouter>
+          </CartProvider>
+        </AuthProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );

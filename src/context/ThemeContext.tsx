@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useEffect } from 'react';
 
 type Theme = 'dark' | 'light';
 
@@ -10,28 +10,17 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>(() => {
-    const saved = localStorage.getItem('tunibots_theme');
-    if (saved === 'light' || saved === 'dark') {
-      return saved;
-    }
-    return 'dark'; // Default theme is dark
-  });
+  const theme: Theme = 'dark';
 
   useEffect(() => {
-    localStorage.setItem('tunibots_theme', theme);
+    localStorage.setItem('tunibots_theme', 'dark');
     const root = window.document.documentElement;
-    if (theme === 'dark') {
-      root.classList.add('dark');
-      root.classList.remove('light');
-    } else {
-      root.classList.add('light');
-      root.classList.remove('dark');
-    }
-  }, [theme]);
+    root.classList.add('dark');
+    root.classList.remove('light');
+  }, []);
 
   const toggleTheme = () => {
-    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+    // No-op since we only support dark theme
   };
 
   return (

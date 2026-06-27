@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { CartItem } from '../data/types';
+import { useAuth } from './AuthContext';
 import { toast } from 'sonner';
 
 interface CartContextType {
@@ -10,6 +11,7 @@ interface CartContextType {
   clearCart: () => void;
   cartCount: number;
   cartTotal: number;
+  rawTotal: number;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -65,8 +67,11 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setCartItems([]);
   };
 
+  const { isVIP } = useAuth();
+
   const cartCount = cartItems.reduce((acc, item) => acc + item.qty, 0);
-  const cartTotal = cartItems.reduce((acc, item) => acc + item.unitPrice * item.qty, 0);
+  const rawTotal = cartItems.reduce((acc, item) => acc + item.unitPrice * item.qty, 0);
+  const cartTotal = isVIP ? rawTotal * 0.85 : rawTotal;
 
   return (
     <CartContext.Provider
@@ -78,6 +83,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         clearCart,
         cartCount,
         cartTotal,
+        rawTotal,
       }}
     >
       {children}
